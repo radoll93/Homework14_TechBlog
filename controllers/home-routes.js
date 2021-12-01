@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
       include: [
         {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
       ],
     });
@@ -18,6 +18,7 @@ router.get('/', async (req, res) => {
     const topics = topicData.map((topic) =>
       topic.get({ plain: true })
     );
+
 
     res.render('home', {
       topics,
@@ -29,51 +30,58 @@ router.get('/', async (req, res) => {
   }
 });
 
-// // GET one gallery
-// // TODO: Replace the logic below with the custom middleware
-// router.get('/gallery/:id', withAuth, async (req, res) => {
-//   // If the user is not logged in, redirect the user to the login page
-//     // If the user is logged in, allow them to view the gallery
-//     try {
-//       const dbGalleryData = await Gallery.findByPk(req.params.id, {
-//         include: [
-//           {
-//             model: Painting,
-//             attributes: [
-//               'id',
-//               'title',
-//               'artist',
-//               'exhibition_date',
-//               'filename',
-//               'description',
-//             ],
-//           },
-//         ],
-//       });
-//       const gallery = dbGalleryData.get({ plain: true });
-//       res.render('gallery', { gallery, loggedIn: req.session.loggedIn });
-//     } catch (err) {
-//       console.log(err);
-//       res.status(500).json(err);
-//     }
-// });
+// GET one topic
+router.get('/topic/:id', async (req, res) => {
+  // If the user is not logged in, redirect the user to the login page
+    // If the user is logged in, allow them to view the topic
+    try {
+      const topicData = await Topic.findByPk(req.params.id, {
+        include: [
+          {
+            model: Comment,
+            attributes: [
+              'comment',
+            ],
+          },
+          {
+            model: User,
+            attributes: ['username'],
+          },
+        ],
+      });
+      const topic = topicData.get({ plain: true });
 
-// // GET one painting
-// // TODO: Replace the logic below with the custom middleware
-// router.get('/painting/:id', withAuth, async (req, res) => {
-//   // If the user is not logged in, redirect the user to the login page
-//     // If the user is logged in, allow them to view the painting
-//     try {
-//       const dbPaintingData = await Painting.findByPk(req.params.id);
+      console.log(topic);
+      res.render('topic', { topic, loggedIn: req.session.loggedIn });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+});
 
-//       const painting = dbPaintingData.get({ plain: true });
+// GET one painting
+router.get('/dashboard', async (req, res) => {
+  try {
+    const dashboardData = await Topic.findAll({
+      include: [
+        {
+          model: User,
+          attributes: ['username'],
+        },
+      ],
+    });
 
-//       res.render('painting', { painting, loggedIn: req.session.loggedIn });
-//     } catch (err) {
-//       console.log(err);
-//       res.status(500).json(err);
-//     }
-// });
+    const dashboard = dashboardData.map((topic) =>
+      topic.get({ plain: true })
+    );
+
+      console.log(dashboard)
+      res.render('dashboard', { dashboard, loggedIn: req.session.loggedIn });
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+});
 
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
