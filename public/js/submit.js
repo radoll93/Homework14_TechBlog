@@ -2,7 +2,6 @@
 const dashboardAddHandler = async (event) => {
     event.preventDefault();
 
-    console.log('click')
   
     const topic = document.querySelector('#topic-title').value.trim();
     const content = document.querySelector('#topic-content').value.trim();

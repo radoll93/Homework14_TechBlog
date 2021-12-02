@@ -27,6 +27,7 @@ router.get('/', async (req, res) => {
     }
 });
 
+// GET add-topic form
 router.get('/add', (req, res) => {
     try{
     res.render('add-topic');
