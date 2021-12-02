@@ -3,13 +3,19 @@
       <p class="headerInfo">Posted by {{topic.user.username}} on {{topic.createdAt}}</p>
     </header>
     <p>{{topic.content}}</p>
-
-
-  <section class="flex-row justify-center">
-    {{#each topic.comments as |comment|}}
-    {{> comment}}
-    {{/each}}
   </section>
+
+
+<section class="card">
+  <header>Comment</header>
+    {{> add-comment}}
   
 </section>
 
+{{!-- if submit btn click, then show comments --}}
+
+{{!-- <section class="card flex-row justify-center">
+  {{#each topic.comments as |comment|}}
+  {{> comment}}
+  {{/each}}
+</section> --}}

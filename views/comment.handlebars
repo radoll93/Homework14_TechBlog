@@ -1,0 +1,19 @@
+<section class="card">
+      <header>{{topic.title}} 
+      <p class="headerInfo">Posted by {{topic.user.username}} on {{topic.createdAt}}</p>
+    </header>
+    <p>{{topic.content}}</p>
+  </section>
+
+
+    <section class="card">
+      <header>Comment
+      </header>
+      {{#each topic.comments as |comment|}}
+      <body>{{comment.comment}}</body>
+      {{/each}}
+  <p>
+      By {{topic.user.username}} 
+  </p>
+      </ul>
+    </section>

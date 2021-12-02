@@ -162,3 +162,17 @@ img {
   align-content: flex-start;
   align-items: center;
 }
+
+textarea {
+  width: 99%;
+  min-height: 100px;
+  padding: 1%;
+  margin: 1% auto;
+  display: block;
+}
+
+.submit {
+  margin: 1% auto;
+  display: block;
+  width: 99%;
+}
