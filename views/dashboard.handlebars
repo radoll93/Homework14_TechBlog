@@ -1,6 +1,8 @@
 
 {{#each dashboard as |dashboard|}}
-<header class="container">{{title}}</header>
+<header class="container" style="margin: 2px auto;">{{title}}</header>
 {{/each}}
 
-<button>Upload</button>
+<a href="/dashboard/add">
+    <button>Upload</button>
+</a>

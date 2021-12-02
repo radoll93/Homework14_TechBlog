@@ -85,30 +85,6 @@ router.get('/topic/:id/comment', async (req, res) => {
     }
 });
 
-// GET dashboard
-router.get('/dashboard', async (req, res) => {
-  try {
-    const dashboardData = await Topic.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
-    });
-
-    const dashboard = dashboardData.map((topic) =>
-      topic.get({ plain: true })
-    );
-
-      console.log(dashboard)
-      res.render('dashboard', { dashboard, loggedIn: req.session.loggedIn });
-    } catch (err) {
-      console.log(err);
-      res.status(500).json(err);
-    }
-});
-
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
