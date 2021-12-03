@@ -1,8 +1,8 @@
 <section class="card">
       <header>{{topic.title}} 
-      <p class="headerInfo">Posted by {{topic.user.username}} on {{topic.createdAt}}</p>
+      <h6 class="headerInfo">Posted by {{topic.user.username}} on {{format_date topic.createdAt}}</h6>
     </header>
-    <p>{{topic.content}}</p>
+    <p class="card-body">{{topic.content}}</p>
   </section>
 
 
