@@ -44,7 +44,6 @@ router.post('/add', withAuth, async (req, res) => {
       const topicData = await Topic.create({
         title: req.body.topic,
         content: req.body.content,
-        posting_date: req.body.date,
         user_id: req.session.userId,
       });
       console.log(topicData)
@@ -55,4 +54,18 @@ router.post('/add', withAuth, async (req, res) => {
     }
 });
   
+
+
+// GET update or delete topic form
+router.get('/modify', withAuth, async (req, res) => {
+  try{
+  const topicData = await Topic.fi
+  res.render('modify-topic', {
+    loggedIn: req.session.loggedIn
+  });
+  } catch {
+      console.log(err)
+  }
+});
+
 module.exports = router;

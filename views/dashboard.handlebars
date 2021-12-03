@@ -1,9 +1,11 @@
 
 {{#each dashboard as |dashboard|}}
+<a href="/dashboard/modify">
 <header class="container" id="dashboard" style="font-size: 1.3rem; padding: 30px; margin: 5px auto; border-radius: 10%">
     {{title}}
     <h6 class="hearderInfo" style="color: var(--secondary);">-{{format_date createdAt}}</h6>
 </header>
+</a>
 {{/each}}
 
 <a href="/dashboard/add">
