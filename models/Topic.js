@@ -19,10 +19,6 @@ Topic.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    posting_date: {
-      type: DataTypes.DATE,
-      allowNull: false,
-    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {

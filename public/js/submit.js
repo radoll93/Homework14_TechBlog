@@ -5,19 +5,18 @@ const dashboardAddHandler = async (event) => {
   
     const topic = document.querySelector('#topic-title').value.trim();
     const content = document.querySelector('#topic-content').value.trim();
-    const date = document.querySelector('#topic-date').value.trim();
   
-    if (topic && content && date) {
+    if (topic && content) {
       const response = await fetch('/dashboard/add', {
         method: 'POST',
-        body: JSON.stringify({ topic, content, date }),
+        body: JSON.stringify({ topic, content }),
         headers: { 'Content-Type': 'application/json' },
       });
   
       if (response.ok) {
         document.location.replace('/dashboard');
       } else {
-        alert('Failed to sign up.');
+        alert('Failed to add.');
       }
     }
   };
