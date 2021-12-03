@@ -62,6 +62,18 @@ router.get('/topic/:id', withAuth, async (req, res) => {
 // GET comment -> comment handlebar
 router.get('/topic/:id/comment', withAuth, async (req, res) => {
   try {
+    const commentData = await Comment.findAll({
+      where: {
+        topic_id: req.params.id,
+      },
+      include: [
+        {model: User}
+      ]
+    })
+
+    const comments = commentData.map((comment) => comment.get({ plain: true }));
+    console.log(comments);
+
     const topicData = await Topic.findByPk(req.params.id, {
       include: [
         {
@@ -77,10 +89,10 @@ router.get('/topic/:id/comment', withAuth, async (req, res) => {
         },
       ],
     });
-    const topic = topicData.get({ plain: true });
-    console.log(topic)
 
-      res.render('comment', { topic });
+    const topic = topicData.get({ plain: true });
+
+      res.render('comment', { topic, comments });
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
