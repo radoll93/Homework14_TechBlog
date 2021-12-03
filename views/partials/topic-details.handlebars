@@ -1,7 +1,7 @@
 <section class="card">
   <a href="/topic/{{id}}">
     <header>{{title}} 
-      <h6 class="headerInfo">Posted by {{user.username}} on {{createdAt}}</h6>
+      <h6 class="headerInfo">Posted by {{user.username}} on {{format_date createdAt}}</h6>
     </header>
     <p class="card-body">{{content}}</p>
   </a>

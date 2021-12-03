@@ -4,7 +4,7 @@ const { Topic, Comment, User } = require('../models');
 const withAuth = require('../utils/auth')
 
 // GET dashboard
-router.get('/', async (req, res) => {
+router.get('/', withAuth, async (req, res) => {
   try {
     const dashboardData = await Topic.findAll({
       include: [
@@ -27,8 +27,8 @@ router.get('/', async (req, res) => {
     }
 });
 
-// GET add-topic form
-router.get('/add', (req, res) => {
+// GET add topic form
+router.get('/add', withAuth, (req, res) => {
     try{
     res.render('add-topic');
     } catch {
@@ -37,12 +37,13 @@ router.get('/add', (req, res) => {
 });
 
 // CREATE new topic
-router.post('/add', async (req, res) => {
+router.post('/add', withAuth, async (req, res) => {
     try {
       const topicData = await Topic.create({
         title: req.body.topic,
         content: req.body.content,
         posting_date: req.body.date,
+        user_id: req.session.userId,
       });
       console.log(topicData)
         res.status(200).json(topicData);

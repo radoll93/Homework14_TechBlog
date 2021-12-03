@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const { compareSync } = require('bcrypt');
 const { Topic, Comment, User } = require('../models');
 // Import the custom middleware
 const withAuth = require('../utils/auth')
@@ -30,7 +31,7 @@ router.get('/', async (req, res) => {
 });
 
 // GET one topic -> topic handlebar
-router.get('/topic/:id', async (req, res) => {
+router.get('/topic/:id', withAuth, async (req, res) => {
   // If the user is not logged in, redirect the user to the login page
     // If the user is logged in, allow them to view the topic
     try {
@@ -59,7 +60,7 @@ router.get('/topic/:id', async (req, res) => {
 });
 
 // GET comment -> comment handlebar
-router.get('/topic/:id/comment', async (req, res) => {
+router.get('/topic/:id/comment', withAuth, async (req, res) => {
   try {
     const topicData = await Topic.findByPk(req.params.id, {
       include: [
@@ -77,6 +78,7 @@ router.get('/topic/:id/comment', async (req, res) => {
       ],
     });
     const topic = topicData.get({ plain: true });
+    console.log(topic)
 
       res.render('comment', { topic });
     } catch (err) {
@@ -86,10 +88,14 @@ router.get('/topic/:id/comment', async (req, res) => {
 });
 
 //CREATE new comment
-router.post('/topic/:id', async (req, res) => {
+router.post('/topic/:id', withAuth, async (req, res) => {
   try {
+    const id = req.headers.referer.split("/").pop();
+    console.log(req.session)
     const commentData = await Comment.create({
       comment: req.body.comment,
+      user_id: req.session.userId,
+      topic_id: id,
     })
     console.log(commentData)
     res.status(200).json(commentData);
