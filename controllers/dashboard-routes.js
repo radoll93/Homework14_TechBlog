@@ -45,7 +45,7 @@ router.post('/add', withAuth, async (req, res) => {
         content: req.body.content,
         user_id: req.session.userId,
       });
-      console.log(topicData)
+
         res.status(200).json(topicData);
       } catch (err) {
       console.log(err);

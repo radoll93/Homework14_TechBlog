@@ -72,7 +72,7 @@ router.get('/topic/:id/comment', withAuth, async (req, res) => {
     })
 
     const comments = commentData.map((comment) => comment.get({ plain: true }));
-    console.log(comments);
+
 
     const topicData = await Topic.findByPk(req.params.id, {
       include: [
@@ -106,13 +106,13 @@ router.get('/topic/:id/comment', withAuth, async (req, res) => {
 router.post('/topic/:id', withAuth, async (req, res) => {
   try {
     const id = req.headers.referer.split("/").pop();
-    console.log(req.session)
+
     const commentData = await Comment.create({
       comment: req.body.comment,
       user_id: req.session.userId,
       topic_id: id,
     })
-    console.log(commentData)
+
     res.status(200).json(commentData);
     } catch (err) {
     console.log(err);
