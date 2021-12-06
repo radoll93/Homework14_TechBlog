@@ -7,7 +7,9 @@
 
 In this blog, you can see and manage useful tech knowledge. On the main page, you can see the uploaded topics regarding to computer languages. By clicking the individual topic, you can make a comment to the topic. Also, you can upload your own topic on the dashboard page. Don't forget to login or sign up to follow up your activities.
 
+Deployed page : https://limitless-ocean-39625.herokuapp.com/
 
+![Tech Blog](./seeds/Homework14_TechBlog.gif)
 
 ## Table of Contents 
 
