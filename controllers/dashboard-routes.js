@@ -19,7 +19,6 @@ router.get('/', withAuth, async (req, res) => {
       topic.get({ plain: true })
     );
 
-      console.log(dashboard)
       res.render('dashboard', { dashboard, loggedIn: req.session.loggedIn });
     } catch (err) {
       console.log(err);
@@ -55,17 +54,5 @@ router.post('/add', withAuth, async (req, res) => {
 });
   
 
-
-// GET update or delete topic form
-router.get('/modify', withAuth, async (req, res) => {
-  try{
-  const topicData = await Topic.fi
-  res.render('modify-topic', {
-    loggedIn: req.session.loggedIn
-  });
-  } catch {
-      console.log(err)
-  }
-});
 
 module.exports = router;
