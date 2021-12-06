@@ -28,13 +28,10 @@ router.get('/', withAuth, async (req, res) => {
 
 // GET add topic form
 router.get('/add', withAuth, (req, res) => {
-    try{
+
     res.render('add-topic', {
       loggedIn: req.session.loggedIn
     });
-    } catch {
-        console.log(err)
-    }
 });
 
 // CREATE new topic
